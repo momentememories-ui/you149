@@ -31,15 +31,16 @@
       position: relative;
     }
 
-    /* ตัวหนังสือตรงกลาง ไม่มีกรอบ */
+    /* ตัวหนังสือตรงกลาง สีขาว ไม่มีกรอบ */
     .message {
       font-size: clamp(1.8rem, 5vw, 3.5rem);
       font-weight: 700;
-      color: #d81b60;
+      color: #ffffff; /* เปลี่ยนเป็นสีขาว */
       text-align: center;
       z-index: 10;
-      text-shadow: 0 4px 15px rgba(255, 255, 255, 0.8),
-                   0 2px 5px rgba(216, 27, 96, 0.2);
+      /* ปรับเงาให้ข้อความสีขาวคมชัดและมีมิติ */
+      text-shadow: 0 4px 15px rgba(216, 27, 96, 0.35),
+                   0 2px 6px rgba(0, 0, 0, 0.15);
       padding: 20px;
       user-select: none;
       animation: pulse 2.5s infinite ease-in-out;
@@ -103,7 +104,7 @@
 
   <script>
     // รายการอิโมจิธีมความรัก วันครบรอบ และของขวัญ
-    const emojis = ['💖', '💕','💝'];
+    const emojis = ['💖', '💕', '💝'];
     const container = document.getElementById('emojiContainer');
 
     function createEmoji() {
