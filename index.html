@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎁</title>
+  <!-- ดึงฟอนต์ Kanit จาก Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* พื้นหลังสีชมพูหวานไล่ระดับ */
+      background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe4e1);
+      font-family: 'Kanit', sans-serif;
+      position: relative;
+    }
+
+    /* ตัวหนังสือตรงกลาง ไม่มีกรอบ */
+    .message {
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: #d81b60;
+      text-align: center;
+      z-index: 10;
+      text-shadow: 0 4px 15px rgba(255, 255, 255, 0.8),
+                   0 2px 5px rgba(216, 27, 96, 0.2);
+      padding: 20px;
+      user-select: none;
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+
+    /* แอนิเมชันให้ตัวหนังสือขยับนุ่มนวลเบาๆ */
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.03);
+      }
+    }
+
+    /* เลเยอร์สำหรับอิโมจิลอย */
+    .emoji-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .floating-emoji {
+      position: absolute;
+      bottom: -60px;
+      user-select: none;
+      animation: floatUp linear infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.9;
+      }
+      85% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-115vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ข้อความหลัก -->
+  <h1 class="message">มองบนโต๊ะเครื่องแป้งดูสิ</h1>
+
+  <!-- คอนเทนเนอร์ใส่อิโมจิลอย -->
+  <div class="emoji-container" id="emojiContainer"></div>
+
+  <script>
+    // รายการอิโมจิธีมความรัก วันครบรอบ และของขวัญ
+    const emojis = ['💖', '💕','💝'];
+    const container = document.getElementById('emojiContainer');
+
+    function createEmoji() {
+      const emojiEl = document.createElement('div');
+      emojiEl.classList.add('floating-emoji');
+      
+      // สุ่มเลือกลิสต์อิโมจิ
+      emojiEl.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+      // สุ่มตำแหน่ง X (ซ้าย-ขวา)
+      const startLeft = Math.random() * 95;
+      emojiEl.style.left = startLeft + 'vw';
+
+      // สุ่มขนาด
+      const size = Math.random() * 20 + 24; // 24px - 44px
+      emojiEl.style.fontSize = size + 'px';
+
+      // สุ่มระยะเวลาลอย
+      const duration = Math.random() * 4 + 5; // 5s - 9s
+      emojiEl.style.animationDuration = duration + 's';
+
+      // สุ่มการหน่วงเวลาเริ่ม
+      const delay = Math.random() * 2;
+      emojiEl.style.animationDelay = delay + 's';
+
+      container.appendChild(emojiEl);
+
+      // ลบ element เมื่อแสดงผลจบเพื่อไม่ให้ค้างในหน่วยความจำ
+      setTimeout(() => {
+        emojiEl.remove();
+      }, (duration + delay) * 1000);
+    }
+
+    // สร้างอิโมจิเริ่มต้น
+    for (let i = 0; i < 15; i++) {
+      createEmoji();
+    }
+
+    // สร้างอิโมจิใหม่อย่างต่อเนื่อง
+    setInterval(createEmoji, 400);
+  </script>
+</body>
+</html>
